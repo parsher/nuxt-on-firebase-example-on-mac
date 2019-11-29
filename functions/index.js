@@ -27,7 +27,9 @@ async function handleRequest(req, res) {
   res.set('Cache-Control', 'public, max-age=1, s-maxage=1')
   await nuxt.render(req, res)
 }
+const cors = require('cors')
 
+app.use(cors({ origin: true }))
 app.get('*', handleRequest)
 app.use(handleRequest)
 exports.nuxtssr = functions.https.onRequest(app)
